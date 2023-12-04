@@ -2,15 +2,7 @@
 import itertools
 import re
 from math import prod
-from typing import (
-    Final,
-    Iterable,
-    Iterator,
-    LiteralString,
-    NotRequired,
-    TypedDict,
-    cast,
-)
+from typing import Final, Iterable, Iterator, LiteralString, NotRequired, TypedDict, cast
 
 import aoc_utils
 
@@ -29,9 +21,7 @@ PART_ONE_BAG_CONTENTS: Final[CubeColorCounts] = {
 
 # Extract the count and color. i.e. " 3 blue"
 GAME_SAMPLE_REGEX: LiteralString = r"(\d+) (\w+)"
-ALLOWED_CUBE_COLORS: Final[set[str]] = set(
-    color for color in PART_ONE_BAG_CONTENTS.keys()
-)
+ALLOWED_CUBE_COLORS: Final[set[str]] = set(color for color in PART_ONE_BAG_CONTENTS.keys())
 
 
 class GameDetails(TypedDict):
@@ -46,9 +36,7 @@ def extract_game_details(game_details: str) -> GameDetails:
     # Strings should always be in this format.
     # only minimal error handling is done.
     game_id, game_details = game_details.split(":")
-    game_id_value = int(
-        "".join(itertools.dropwhile(lambda char: not char.isdigit(), game_id))
-    )
+    game_id_value = int("".join(itertools.dropwhile(lambda char: not char.isdigit(), game_id)))
 
     samples: list[CubeColorCounts] = []
 
@@ -88,9 +76,7 @@ def minimum_required_cube_color_counts(game_details: GameDetails) -> CubeColorCo
     return CubeColorCounts(red=min_red, blue=min_blue, green=min_green)
 
 
-def parse_games_list_for_possible_game_ids(
-    filename: str, *, part_one: bool
-) -> Iterator[int]:
+def parse_games_list_for_possible_game_ids(filename: str, *, part_one: bool) -> Iterator[int]:
     game_data = aoc_utils.load_input(filename)
 
     for line in game_data.splitlines():
@@ -104,13 +90,8 @@ def parse_games_list_for_possible_game_ids(
 
 
 if __name__ == "__main__":
-    assert (
-        sum(parse_games_list_for_possible_game_ids("example.txt", part_one=True)) == 8
-    )
-    assert (
-        sum(parse_games_list_for_possible_game_ids("example.txt", part_one=False))
-        == 2286
-    )
+    assert sum(parse_games_list_for_possible_game_ids("example.txt", part_one=True)) == 8
+    assert sum(parse_games_list_for_possible_game_ids("example.txt", part_one=False)) == 2286
     print(
         "Part one:",
         sum(parse_games_list_for_possible_game_ids("puzzle.txt", part_one=True)),

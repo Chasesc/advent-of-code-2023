@@ -86,8 +86,6 @@ def parse_calibration_document(filename: str, *, part_one: bool) -> Iterator[int
 
 if __name__ == "__main__":
     assert sum(parse_calibration_document("example_part_one.txt", part_one=True)) == 142
-    assert (
-        sum(parse_calibration_document("example_part_two.txt", part_one=False)) == 281
-    )
+    assert sum(parse_calibration_document("example_part_two.txt", part_one=False)) == 281
     print("Part one:", sum(parse_calibration_document("puzzle.txt", part_one=True)))
     print("Part two:", sum(parse_calibration_document("puzzle.txt", part_one=False)))
